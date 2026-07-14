@@ -4,7 +4,7 @@ using System.Collections;
 public class TilemapMovement : MonoBehaviour
 {
     [SerializeField] private float movementTime = 1f;
-    [SerializeField] private float tileSpacing = 2f;
+    [SerializeField] private float tileSpacing = 1.25f;
 
     private bool isMoving;
 
@@ -75,5 +75,20 @@ public class TilemapMovement : MonoBehaviour
 
         transform.position = endPos;
         isMoving = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        // Draw the four adjacent tile positions
+        Gizmos.DrawWireCube(transform.position + Vector3.up * tileSpacing, Vector3.one * 0.9f);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * tileSpacing, Vector3.one * 0.9f);
+        Gizmos.DrawWireCube(transform.position + Vector3.left * tileSpacing, Vector3.one * 0.9f);
+        Gizmos.DrawWireCube(transform.position + Vector3.right * tileSpacing, Vector3.one * 0.9f);
+
+        // Draw the player's current tile
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.9f);
     }
 }
